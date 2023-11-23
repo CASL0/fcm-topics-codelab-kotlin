@@ -66,6 +66,11 @@ class MainViewModel : ViewModel() {
             }
             uiState.copy(stockCategories = stockCategories)
         }
+        if (isSubscribed) {
+            subscribeToStockCategory(topicName)
+        } else {
+            unsubscribeFromStockCategory(topicName)
+        }
     }
 
     /**
