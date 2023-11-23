@@ -91,9 +91,10 @@ class FcmSender {
      * @throws [com.google.firebase.messaging.FirebaseMessagingException]
      */
     @Throws(FirebaseMessagingException::class)
-    fun sendMessageToFcmRegistrationToken(messageEntity: MessageEntity) {
-        val registrationToken = "" // TODO: Add FCM Registration Token for target app instance.
-
+    fun sendMessageToFcmRegistrationToken(
+        registrationToken: String,
+        messageEntity: MessageEntity
+    ) {
         val message = Message.builder()
             .setNotification(
                 Notification.builder()
