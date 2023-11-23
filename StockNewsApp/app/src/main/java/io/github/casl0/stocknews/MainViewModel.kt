@@ -67,4 +67,22 @@ class MainViewModel : ViewModel() {
             uiState.copy(stockCategories = stockCategories)
         }
     }
+
+    /**
+     * トピックを購読します
+     *
+     * @param topicName 購読対象のトピック
+     */
+    fun subscribeToStockCategory(topicName: CharSequence) {
+        TODO("Topic subscribing call")
+    }
+
+    /**
+     * トピックを購読解除します
+     *
+     * @param topicName 購読解除対象のトピック
+     */
+    fun unsubscribeFromStockCategory(topicName: CharSequence) {
+        TODO("Topic unsubscribing call")
+    }
 }
