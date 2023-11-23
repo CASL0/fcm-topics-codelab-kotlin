@@ -3,6 +3,7 @@ package io.github.casl0.stocknews
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,38 +14,46 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.github.casl0.stocknews.model.STOCK_CATEGORIES
 import io.github.casl0.stocknews.ui.theme.StockNewsAppTheme
 
 class MainActivity : ComponentActivity() {
+    private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             StockNewsAppTheme {
-                StockNewsApp()
+                StockNewsApp(viewModel)
             }
         }
     }
 }
 
-
 @Composable
-private fun StockNewsApp() {
+private fun StockNewsApp(viewModel: MainViewModel) {
     Scaffold {
         Column(
                 modifier = Modifier
                         .padding(it)
                         .verticalScroll(rememberScrollState())
         ) {
-            STOCK_CATEGORIES.forEach { category ->
+            val uiState by viewModel.uiState.collectAsState()
+            uiState.stockCategories.forEach { category ->
                 StockCategoryItem(
                         categoryName = category.categoryName,
                         isSubscribed = category.isSubscribed,
-                        onCheckedChange = {},
+                        onCheckedChange = { checked ->
+                            viewModel.toggleSubscribed(
+                                    category.topicName,
+                                    checked,
+                            )
+                        },
                         modifier = Modifier.padding(horizontal = 8.dp)
                 )
             }
