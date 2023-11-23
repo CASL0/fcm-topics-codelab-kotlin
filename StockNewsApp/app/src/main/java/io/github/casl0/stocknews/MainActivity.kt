@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -33,7 +35,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun StockNewsApp() {
     Scaffold {
-        Column(modifier = Modifier.padding(it)) {
+        Column(
+                modifier = Modifier
+                        .padding(it)
+                        .verticalScroll(rememberScrollState())
+        ) {
             STOCK_CATEGORIES.forEach { category ->
                 StockCategoryItem(
                         categoryName = category.categoryName,
