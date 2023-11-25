@@ -29,10 +29,8 @@ package io.github.casl0.stocknews.messages.model
  *
  * @property title メッセージのタイトル
  * @property body メッセージのボディ
- * @property topic メッセージのトピック
  */
 data class MessageEntity(
     val title: String,
     val body: String,
-    val topic: String
 )
