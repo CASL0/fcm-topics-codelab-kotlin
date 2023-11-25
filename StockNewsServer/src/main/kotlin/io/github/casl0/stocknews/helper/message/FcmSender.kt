@@ -67,28 +67,35 @@ class FcmSender {
     /**
      * FCM トピック条件にメッセージを送信します
      *
+     * @param topicCondition 送信先のトピック条件（例：'Technology' in topics || 'Automotive' in topics）
      * @param messageEntity メッセージのエンティティ
      * @return 送信に成功したメッセージ内容
      */
-    fun sendMessageToFcmTopicCondition(messageEntity: MessageEntity): String {
-        val topicCondition = "" // TODO: Provide the Topic Condition you want to send to. Eg., 'Technology' in topics || 'Automotive' in topics
+    fun sendMessageToFcmTopicCondition(
+        topicCondition: String,
+        messageEntity: MessageEntity
+    ): String {
         TODO("Implement FCM Topic Condition send call")
     }
 
     /**
      * FCM トピックにメッセージを送信します
      *
+     * @param topicName 送信先のトピック名
      * @param messageEntity メッセージのエンティティ
      * @return 送信に成功したメッセージ内容
      */
-    fun sendMessageToFcmTopic(messageEntity: MessageEntity): String {
-        val topicName = "" // TODO: Provide the Topic you want to send to -> /topics/<Topic Name>. Eg., /topics/Technology
+    fun sendMessageToFcmTopic(
+        topicName: String,
+        messageEntity: MessageEntity
+    ): String {
         TODO("Implement FCM Topic send call")
     }
 
     /**
      * FCM 登録トークンにメッセージを送信します
      *
+     * @param registrationToken 送信先の登録トークン
      * @param messageEntity メッセージのエンティティ
      * @return 送信に成功したメッセージ内容
      * @throws [com.google.firebase.messaging.FirebaseMessagingException]
