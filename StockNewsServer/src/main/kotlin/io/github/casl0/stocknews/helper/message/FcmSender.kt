@@ -31,7 +31,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingException
 import com.google.firebase.messaging.Message
 import com.google.firebase.messaging.Notification
-import io.github.casl0.stocknews.entity.MessageEntity
+import io.github.casl0.stocknews.messages.model.MessageEntity
 import org.springframework.stereotype.Component
 import java.io.IOException
 

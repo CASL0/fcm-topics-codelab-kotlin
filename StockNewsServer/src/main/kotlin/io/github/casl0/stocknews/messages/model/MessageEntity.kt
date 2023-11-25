@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-package io.github.casl0.stocknews.entity
+package io.github.casl0.stocknews.messages.model
 
 /**
- * [io.github.casl0.stocknews.controller.MessageController]のリクエストで受けるエンティティ
+ * [io.github.casl0.stocknews.messages.controller.MessageController]のリクエストで受けるエンティティ
  *
  * @property title メッセージのタイトル
  * @property body メッセージのボディ
