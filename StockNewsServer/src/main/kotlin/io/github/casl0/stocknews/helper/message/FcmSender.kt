@@ -68,8 +68,9 @@ class FcmSender {
      * FCM トピック条件にメッセージを送信します
      *
      * @param messageEntity メッセージのエンティティ
+     * @return 送信に成功したメッセージ内容
      */
-    fun sendMessageToFcmTopicCondition(messageEntity: MessageEntity) {
+    fun sendMessageToFcmTopicCondition(messageEntity: MessageEntity): String {
         val topicCondition = "" // TODO: Provide the Topic Condition you want to send to. Eg., 'Technology' in topics || 'Automotive' in topics
         TODO("Implement FCM Topic Condition send call")
     }
@@ -78,8 +79,9 @@ class FcmSender {
      * FCM トピックにメッセージを送信します
      *
      * @param messageEntity メッセージのエンティティ
+     * @return 送信に成功したメッセージ内容
      */
-    fun sendMessageToFcmTopic(messageEntity: MessageEntity) {
+    fun sendMessageToFcmTopic(messageEntity: MessageEntity): String {
         val topicName = "" // TODO: Provide the Topic you want to send to -> /topics/<Topic Name>. Eg., /topics/Technology
         TODO("Implement FCM Topic send call")
     }
@@ -88,13 +90,14 @@ class FcmSender {
      * FCM 登録トークンにメッセージを送信します
      *
      * @param messageEntity メッセージのエンティティ
+     * @return 送信に成功したメッセージ内容
      * @throws [com.google.firebase.messaging.FirebaseMessagingException]
      */
     @Throws(FirebaseMessagingException::class)
     fun sendMessageToFcmRegistrationToken(
         registrationToken: String,
         messageEntity: MessageEntity
-    ) {
+    ): String {
         val message = Message.builder()
             .setNotification(
                 Notification.builder()
@@ -104,7 +107,7 @@ class FcmSender {
             )
             .setToken(registrationToken)
             .build()
-        FirebaseMessaging.getInstance()
+        return FirebaseMessaging.getInstance()
             .send(message)
     }
 }
