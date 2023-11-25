@@ -1,0 +1,6 @@
+spring:
+    mvc:
+        problemdetails.enabled: true
+
+server:
+    port: 8090
