@@ -24,12 +24,19 @@
 
 package io.github.casl0.stocknews
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.google.firebase.messaging.FirebaseMessaging
 import io.github.casl0.stocknews.model.STOCK_CATEGORIES
 import io.github.casl0.stocknews.model.StockCategory
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 /**
  * UI状態のdata class
@@ -45,6 +52,12 @@ class MainViewModel : ViewModel() {
     /** UI状態 */
     val uiState: StateFlow<UiState> get() = _uiState
     private val _uiState = MutableStateFlow(UiState())
+
+    /** スナックバーに表示するメッセージチャネル */
+    private val snackbarChannel = Channel<CharSequence>()
+
+    /** スナックバー表示イベント */
+    val hasMessage: Flow<CharSequence> = snackbarChannel.receiveAsFlow()
 
     /**
      * 購読の切り替えをします
@@ -79,7 +92,16 @@ class MainViewModel : ViewModel() {
      * @param topicName 購読対象のトピック
      */
     private fun subscribeToStockCategory(topicName: CharSequence) {
-        TODO("Topic subscribing call")
+        FirebaseMessaging.getInstance().subscribeToTopic(topicName.toString())
+                .addOnSuccessListener {
+                    Log.i(
+                            TAG,
+                            "Subscribed to topic: $topicName"
+                    )
+                    viewModelScope.launch {
+                        snackbarChannel.send("Subscribed to topic: $topicName")
+                    }
+                }
     }
 
     /**
@@ -88,6 +110,17 @@ class MainViewModel : ViewModel() {
      * @param topicName 購読解除対象のトピック
      */
     private fun unsubscribeFromStockCategory(topicName: CharSequence) {
-        TODO("Topic unsubscribing call")
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(topicName.toString())
+                .addOnSuccessListener {
+                    Log.i(
+                            TAG,
+                            "Unsubscribed from topic: $topicName"
+                    )
+                    viewModelScope.launch {
+                        snackbarChannel.send("Unsubscribed from topic: $topicName")
+                    }
+                }
     }
 }
+
+private const val TAG = "MainViewModel"
