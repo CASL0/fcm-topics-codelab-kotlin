@@ -70,12 +70,24 @@ class FcmSender {
      * @param topicCondition 送信先のトピック条件（例：'Technology' in topics || 'Automotive' in topics）
      * @param messageEntity メッセージのエンティティ
      * @return 送信に成功したメッセージ内容
+     * @throws [com.google.firebase.messaging.FirebaseMessagingException]
      */
+    @Throws(FirebaseMessagingException::class)
     fun sendMessageToFcmTopicCondition(
         topicCondition: String,
         messageEntity: MessageEntity
     ): String {
-        TODO("Implement FCM Topic Condition send call")
+        val message = Message.builder()
+            .setNotification(
+                Notification.builder()
+                    .setTitle(messageEntity.title)
+                    .setBody(messageEntity.body)
+                    .build()
+            )
+            .setCondition(topicCondition)
+            .build()
+        return FirebaseMessaging.getInstance()
+            .send(message)
     }
 
     /**
@@ -84,12 +96,24 @@ class FcmSender {
      * @param topicName 送信先のトピック名
      * @param messageEntity メッセージのエンティティ
      * @return 送信に成功したメッセージ内容
+     * @throws [com.google.firebase.messaging.FirebaseMessagingException]
      */
+    @Throws(FirebaseMessagingException::class)
     fun sendMessageToFcmTopic(
         topicName: String,
         messageEntity: MessageEntity
     ): String {
-        TODO("Implement FCM Topic send call")
+        val message = Message.builder()
+            .setNotification(
+                Notification.builder()
+                    .setTitle(messageEntity.title)
+                    .setBody(messageEntity.body)
+                    .build()
+            )
+            .setTopic(topicName)
+            .build()
+        return FirebaseMessaging.getInstance()
+            .send(message)
     }
 
     /**
