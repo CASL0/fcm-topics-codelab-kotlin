@@ -57,7 +57,7 @@ class MainViewModel : ViewModel() {
             isSubscribed: Boolean,
     ) {
         _uiState.update { uiState ->
-            val stockCategories = uiState.stockCategories.toMutableList().map {
+            val stockCategories = uiState.stockCategories.map {
                 if (it.topicName == topicName) {
                     it.copy(isSubscribed = isSubscribed)
                 } else {
@@ -78,7 +78,7 @@ class MainViewModel : ViewModel() {
      *
      * @param topicName 購読対象のトピック
      */
-    fun subscribeToStockCategory(topicName: CharSequence) {
+    private fun subscribeToStockCategory(topicName: CharSequence) {
         TODO("Topic subscribing call")
     }
 
@@ -87,7 +87,7 @@ class MainViewModel : ViewModel() {
      *
      * @param topicName 購読解除対象のトピック
      */
-    fun unsubscribeFromStockCategory(topicName: CharSequence) {
+    private fun unsubscribeFromStockCategory(topicName: CharSequence) {
         TODO("Topic unsubscribing call")
     }
 }
