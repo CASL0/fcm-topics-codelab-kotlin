@@ -51,6 +51,10 @@ git checkout starter
   - [StockNewsApp](./StockNewsApp/)を Android Studio で開いてください。
   - [StockNewsServer](./StockNewsServer/)を IntelliJ IDEA で開いてください。
 
+次の本でコードラボを開始してください。
+
+- https://zenn.dev/casl0/books/fcm-topics-codelab-kotlin
+
 ## ライセンス
 
 ```
